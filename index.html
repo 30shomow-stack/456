@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
-    </head>
-    <body>
-        <a-scene>
-                    <a-assets>
-      <audio id="soundEffect1; volume = 1" src="sound1.mp3" preload="auto"></audio>
- </a-assets>
-        <a-camera><a-cursor></a-cursor></a-camera>
-
-
-        <a-plane position="0 0 -5" height="5" width="5" color="pink"></a-plane>
-        <a-plane position="0 0 -5" rotation="-90 0 0"height= "5" width="5" color="black"></a-plane>
-        <a-plane position="0 0 -5" rotation="0 -90 0" height="5" width="5" color="yellow" sound="src: #soundEffect1 on: click"></a-plane>
-        </a-scene>
-    </body>
+<head>
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+</head>
+<body>
+  <a-scene>
+    <a-assets>
+      <audio id="soundEffect1" src="sound1.mp3" preload="auto"></audio>
+    </a-assets>
+    
+    <a-camera>
+      <a-cursor></a-cursor>
+    </a-camera>
+    
+    <!-- Adjusted positions to prevent overlapping -->
+    <a-plane position="0 0 -5" height="5" width="5" color="pink"></a-plane>
+    <a-plane position="0 -2.5 -5" rotation="-90 0 0" height="5" width="5" color="black"></a-plane>
+    <a-plane position="-2.5 0 -5" rotation="0 90 0" height="5" width="5" color="yellow" sound="src: #soundEffect1; on: click; volume: 1"></a-plane>
+  </a-scene>
+</body>
 </html>
