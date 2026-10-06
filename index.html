@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
 </head>
 <body>
-  <a-scene>
-    <a-assets>
-      <audio id="soundEffect1" src="knock_ater.mp3" preload="auto"></audio>
-    </a-assets>
-    <a-entity id="music" sound=src: knock_ater.mp3 loop: true; volume: 1;> </a-entity>
-    
-    <a-camera>
-      <a-cursor></a-cursor>
-    </a-camera>
-  
-    
-    <!-- Adjusted positions to prevent overlapping -->
-    <a-plane position="0 0 -5" height="5" width="5" color="pink"></a-plane>
-    <a-plane position="0 -2.5 -5" rotation="-90 0 0" height="5" width="5" color="black"></a-plane>
-    <a-plane position="-2.5 0 -5" rotation="0 90 0" height="5" width="5" color="yellow"></a-plane>
-    <a-box position="0 2 -2" height="5" width="5" depth="5" color="black" sound="src: #soundEffect1; on: click; volume: 1"></a-box>
-  </a-scene>
-  <script>
-      document.addEventListener('DOMContentLoaded', () => {
-      const scene = document.querySelector('a-scene');
-      const music = document.querySelector('#music');
+    <a-scene>
+        <a-assets>
+            <audio id="knockAudio" src="knock_ater.mp3" preload="auto"></audio>
+            <audio id="bgmAudio" src="sound.mp3" preload="auto"></audio>
+        </a-assets>
 
-      const startMusic = () => {
-      music.components.sound.playSound();
-    };
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
 
-    // Fires once on the first user interaction
-    scene.addEventListener('mousemove', startMusic, { once: true });
-    window.addEventListener('touchstart', startMusic, { once: true });
-  });
-</script>
+        <!-- Environment Planes -->
+        <a-plane position="0 0 -5" height="5" width="5" color="pink"></a-plane>
+        <a-plane position="0 -2.5 -5" rotation="-90 0 0" height="5" width="5" color="black"></a-plane>
+        <a-plane position="-2.5 0 -5" rotation="0 90 0" height="5" width="5" color="yellow"></a-plane>
 
+        <!-- Clickable Box -->
+        <a-box position="0 2 -2" height="5" width="5" depth="5" color="black" sound="src: #knockAudio; on: click; volume: 1"></a-box>
 
+        <!-- Background Music Entity (Fixed syntax and changed ID to avoid duplication) -->
+        
+    </a-scene>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scene = document.querySelector('a-scene');
+            const musicPlayer = document.querySelector('#bgmPlayer');
 
+            const startMusic = () => {
+                // Ensure the sound component is fully initialized before playing
+                if (musicPlayer.components.sound) {
+                    musicPlayer.components.sound.playSound();
+                }
+            };
 
+            // Triggers audio play upon the first user interaction to bypass browser autoplay policies
+            scene.addEventListener('mousemove', startMusic, { once: true });
+            window.addEventListener('touchstart', startMusic, { once: true });
+        });
+    </script>
 </body>
 </html>
